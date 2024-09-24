@@ -3,52 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiche Client SPIM Waterproofing</title>
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<style>
-#resultat {
-display: none; /* Masquer la section des résultats par défaut */
-margin-top: 20px; /* Ajouter un peu d'espace au-dessus */
-}
-</style>
+<title>Devis Remontées Capillaires</title>
 </head>
 <body>
-<div class="app">
-<h1>Fiche de renseignement</h1>
-<form id="fiche-client">
-<label for="nom">Nom du client:</label>
-<input type="text" id="nom" required>
+<h1>Formulaire Devis Remontées Capillaires</h1>
 
-<label for="email">Email du client:</label>
-<input type="email" id="email" required>
+<form id="fiche-client">
+<label for="nom">Nom:</label>
+<input type="text" id="nom" name="nom" required><br>
+
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required><br>
 
 <label for="telephone">Téléphone:</label>
-<input type="text" id="telephone" required>
+<input type="tel" id="telephone" name="telephone" required><br>
 
 <label for="adresse">Adresse:</label>
-<input type="text" id="adresse" required>
+<input type="text" id="adresse" name="adresse" required><br>
 
-<label for="longueur">Longueur des murs (en mètres):</label>
-<input type="number" id="longueur" required>
+<label for="longueur">Longueur des murs (mètres):</label>
+<input type="number" id="longueur" name="longueur" step="0.01" required><br>
 
-<label for="epaisseur">Épaisseur des murs (en cm):</label>
-<input type="number" id="epaisseur" required>
+<label for="epaisseur">Épaisseur des murs (cm):</label>
+<input type="number" id="epaisseur" name="epaisseur" step="0.01" required><br>
 
-<p>Prix par mètre : Rs 3900</p>
-
-<button type="submit">Calculer Devis</button>
+<button type="submit">Calculer le devis</button>
 </form>
 
-<div id="resultat">
-<h2>Devis</h2>
-<p id="prix-total">Total : Rs <span>0</span></p>
-<p id="nb-trous">Nombre de trous à percer : <span>0</span></p>
-<p id="volume-injecte">Volume injecté (en poches de 600 ml) : <span>0</span></p>
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
