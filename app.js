@@ -15,7 +15,7 @@ const epaisseur = parseFloat(document.getElementById('epaisseur').value);
 // Calcul du devis
 const prixParMetre = 3900;
 const prixTotal = longueur * prixParMetre;
-const nbTrous = longueur * 10;
+const nbTrous = Math.round(longueur * 10); // Utiliser Math.round pour le nombre de trous
 const volumeParMetre = (epaisseur / 22) * 3 / 10; // Base de calcul pour 22cm d'épaisseur
 const volumeInjecte = longueur * volumeParMetre;
 
@@ -29,8 +29,22 @@ longueur: longueur,
 epaisseur: epaisseur,
 nbTrous: nbTrous,
 volumeInjecte: volumeInjecte.toFixed(1),
-prixTotal: prixTotal
+prixTotal: prixTotal.toFixed(2)
 };
+
+// Afficher les résultats dans la section prévue
+document.getElementById('nom-resultat').textContent = nom;
+document.getElementById('email-resultat').textContent = email;
+document.getElementById('telephone-resultat').textContent = telephone;
+document.getElementById('adresse-resultat').textContent = adresse;
+document.getElementById('longueur-resultat').textContent = longueur;
+document.getElementById('epaisseur-resultat').textContent = epaisseur;
+document.getElementById('nb-trous-resultat').textContent = nbTrous;
+document.getElementById('volume-injecte-resultat').textContent = volumeInjecte.toFixed(1);
+document.getElementById('prix-total-resultat').textContent = prixTotal.toFixed(2);
+
+// Afficher la section des résultats
+document.getElementById('resultat').style.display = 'block';
 
 // Envoyer les données par EmailJS
 emailjs.send('service_qp3sjeo', 'template_pljm4xp', templateParams)
