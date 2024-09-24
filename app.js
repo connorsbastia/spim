@@ -16,8 +16,8 @@ const epaisseur = parseFloat(document.getElementById('epaisseur').value);
 const prixParMetre = 3900;
 const prixTotal = longueur * prixParMetre;
 const nbTrous = Math.round(longueur * 10); // Utiliser Math.round pour le nombre de trous
-const volumeParMetre = (epaisseur / 22) * 3 / 10; // Base de calcul pour 22cm d'épaisseur
-const volumeInjecte = longueur * volumeParMetre;
+const nbPochesParMetre = (epaisseur / 22) * 3 / 10; // Base de calcul pour 22cm d'épaisseur
+const nbPochesInjecte = longueur * nbPochesParMetre;
 
 // Préparer les paramètres pour EmailJS
 const templateParams = {
@@ -28,7 +28,7 @@ adresse: adresse,
 longueur: longueur,
 epaisseur: epaisseur,
 nbTrous: nbTrous,
-volumeInjecte: volumeInjecte.toFixed(1),
+nbPochesInjecte: nbPochesInjecte.toFixed(1),
 prixTotal: prixTotal.toFixed(2)
 };
 
@@ -40,7 +40,7 @@ document.getElementById('adresse-resultat').textContent = adresse;
 document.getElementById('longueur-resultat').textContent = longueur;
 document.getElementById('epaisseur-resultat').textContent = epaisseur;
 document.getElementById('nb-trous-resultat').textContent = nbTrous;
-document.getElementById('volume-injecte-resultat').textContent = volumeInjecte.toFixed(1);
+document.getElementById('nb-Poches-600ml-resultat').textContent = nbPochesInjecte.toFixed(1);
 document.getElementById('prix-total-resultat').textContent = prixTotal.toFixed(2);
 
 // Afficher la section des résultats
