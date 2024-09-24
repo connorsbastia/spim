@@ -40,10 +40,9 @@ document.getElementById('adresse-resultat').textContent = adresse;
 document.getElementById('longueur-resultat').textContent = longueur;
 document.getElementById('epaisseur-resultat').textContent = epaisseur;
 document.getElementById('nb-trous-resultat').textContent = nbTrous;
-document.getElementById('volume-injecte-resultat').textContent = poches + " poches de 600 ml";
-document.getElementById('prix-total-resultat').textContent = 'Rs ' + prixTotal.toLocaleString('fr-MU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+document.getElementById('volume-injecte-resultat').textContent = volumeInjecte.toFixed(1);
+document.getElementById('prix-total-resultat').textContent = prixTotal.toFixed(2);
 
-  
 // Afficher la section des résultats
 document.getElementById('resultat').style.display = 'block';
 
