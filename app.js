@@ -1,6 +1,10 @@
+// Initialiser EmailJS avec ton USER ID
+emailjs.init("d_CfogyHF8gdpyXsx");
+
 document.getElementById('fiche-client').addEventListener('submit', function(event) {
 event.preventDefault();
 
+// Récupérer les valeurs des champs du formulaire
 const nom = document.getElementById('nom').value;
 const email = document.getElementById('email').value;
 const telephone = document.getElementById('telephone').value;
@@ -8,30 +12,14 @@ const adresse = document.getElementById('adresse').value;
 const longueur = parseFloat(document.getElementById('longueur').value);
 const epaisseur = parseFloat(document.getElementById('epaisseur').value);
 
-// Vérification des entrées
-if (isNaN(longueur) || longueur <= 0 || isNaN(epaisseur) || epaisseur <= 0) {
-alert("Veuillez entrer des valeurs valides pour la longueur et l'épaisseur.");
-return;
-}
-
+// Calcul du devis
 const prixParMetre = 3900;
 const prixTotal = longueur * prixParMetre;
-
-// Calcul du nombre de trous à percer
-const nbTrous = Math.round(longueur * 10); // Utilisation de Math.round pour un entier
-
-// Calcul du volume injecté en poches de 600ml
-const volumeParMetre = (epaisseur / 22) * 3 / 10;
+const nbTrous = longueur * 10;
+const volumeParMetre = (epaisseur / 22) * 3 / 10; // Base de calcul pour 22cm d'épaisseur
 const volumeInjecte = longueur * volumeParMetre;
 
-// Afficher les résultats
-document.getElementById('prix-total').querySelector('span').textContent = prixTotal.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-document.getElementById('nb-trous').querySelector('span').textContent = nbTrous;
-document.getElementById('volume-injecte').querySelector('span').textContent = volumeInjecte.toFixed(1);
-
-// Envoi de l'e-mail via EmailJS
-emailjs.init("d_CfogyHF8gdpyXsx"); // Remplacer par ton USER ID de EmailJS
-
+// Préparer les paramètres pour EmailJS
 const templateParams = {
 nom: nom,
 email: email,
@@ -41,31 +29,16 @@ longueur: longueur,
 epaisseur: epaisseur,
 nbTrous: nbTrous,
 volumeInjecte: volumeInjecte.toFixed(1),
-prixTotal: prixTotal.toFixed(2)
-};
-
-emailjs.send('service_qp3sjeo', 'template_gor9z9a', templateParams)
-.then(function(response) {
-alert('Devis envoyé par e-mail avec succès!', response.status, response.text);
-document.getElementById('fiche-client').reset(); // Réinitialiser le formulaire
-}, function(error) {
-alert('Erreur lors de l\'envoi de l\'e-mail:', error.text);
-});
-
-// Optionnel : sauvegarder les données localement
-const clientData = {
-nom: nom,
-email: email,
-telephone: telephone,
-adresse: adresse,
-longueur: longueur,
-epaisseur: epaisseur,
-nbTrous: nbTrous,
-volumeInjecte: volumeInjecte,
 prixTotal: prixTotal
 };
 
-localStorage.setItem('dernierDevis', JSON.stringify(clientData));
-
-alert('Devis calculé et sauvegardé.');
+// Envoyer les données par EmailJS
+emailjs.send('service_qp3sjeo', 'template_pljm4xp', templateParams)
+.then(function(response) {
+console.log('SUCCESS!', response.status, response.text);
+alert('Devis envoyé par e-mail avec succès!');
+}, function(error) {
+console.log('FAILED...', error);
+alert('Erreur lors de l\'envoi de l\'e-mail :', error);
+});
 });
