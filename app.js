@@ -23,7 +23,7 @@ document.getElementById('nb-trous').querySelector('span').textContent = nbTrous;
 document.getElementById('volume-injecte').querySelector('span').textContent = volumeInjecte.toFixed(1);
 
 // Envoi de l'e-mail via EmailJS
-emailjs.init("mh-SeAzsloe0B2MG4Ewa0"); 
+emailjs.init("d_CfogyHF8gdpyXsx"); 
 
 const templateParams = {
 nom: nom,
