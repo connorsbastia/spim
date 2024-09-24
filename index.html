@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche Client SPIM Waterproofing</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="app">
+<h1>Fiche de renseignement</h1>
+<form id="fiche-client">
+<label for="nom">Nom du client:</label>
+<input type="text" id="nom" required>
+
+<label for="telephone">Téléphone:</label>
+<input type="text" id="telephone" required>
+
+<label for="adresse">Adresse:</label>
+<input type="text" id="adresse" required>
+
+<label for="longueur">Longueur des murs (en mètres):</label>
+<input type="number" id="longueur" required>
+
+<p>Prix par mètre : Rs 3900</p>
+
+<button type="submit">Calculer Devis</button>
+</form>
+
+<div id="resultat">
+<h2>Devis</h2>
+<p id="prix-total">Total : Rs <span>0</span></p>
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
