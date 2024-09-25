@@ -1,21 +1,35 @@
-self.addEventListener('install', (e) => {
-e.waitUntil(
-caches.open('spim-pwa').then((cache) => {
-return cache.addAll([
+const CACHE_NAME = 'devis-app-cache-v1';
+const urlsToCache = [
 './',
 './index.html',
-'./style.css',
 './app.js',
-'./icon.png'
-]);
+'./manifest.json',
+'./icon-192x192.png',
+'./icon-512x512.png'
+];
+
+// Installer le Service Worker et mettre en cache les ressources
+self.addEventListener('install', event => {
+event.waitUntil(
+caches.open(CACHE_NAME)
+.then(cache => {
+console.log('Mise en cache des ressources');
+return cache.addAll(urlsToCache);
 })
 );
 });
 
-self.addEventListener('fetch', (e) => {
-e.respondWith(
-caches.match(e.request).then((response) => {
-return response || fetch(e.request);
+// Activer le Service Worker
+self.addEventListener('activate', event => {
+console.log('Service Worker activé');
+});
+
+// Intercepter les requêtes réseau et servir les fichiers en cache si disponibles
+self.addEventListener('fetch', event => {
+event.respondWith(
+caches.match(event.request)
+.then(response => {
+return response || fetch(event.request);
 })
 );
 });
