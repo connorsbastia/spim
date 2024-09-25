@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Devis Remontées Capillaires</title>
+<!-- Lien vers le manifeste -->
+<link rel="manifest" href="manifest.json">
+<!-- Icônes pour l'écran d'accueil -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
+</head>
+<body>
+<h1>Formulaire Devis Remontées Capillaires</h1>
 <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
 <style>
 body {
@@ -92,5 +100,16 @@ border: 1px solid #ced4da;
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src="app.js"></script>
+<!-- Enregistrement du Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('./service-worker.js')
+.then(function(registration) {
+console.log('Service Worker enregistré avec succès:', registration);
+})
+.catch(function(error) {
+console.log('Échec de l\'enregistrement du Service Worker:', error);
+});
+}
 </body>
 </html>
