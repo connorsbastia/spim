@@ -1,35 +1,108 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPIM Waterproofing Ltd</title>
+    <title>Fiche de Relevé - Remontées Capillaires</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Mettez à jour le SDK ici -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fiche Relevé">
+    <link rel="apple-touch-icon" href="/images/icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Demande de Devis</h1>
-     <form id="fiche-client">
-        <input type="text" id="nom" placeholder="Nom" required>
-     <input type="email" id="email" placeholder="Email" required>
-        <input type="text" id="telephone" placeholder="Téléphone" required>
-        <input type="text" id="adresse" placeholder="Adresse" required>
-        <input type="number" id="longueur" placeholder="Longueur (m)" required>
-        <input type="number" id="epaisseur" placeholder="Épaisseur (cm)" required>
-        <button type="submit">Envoyer</button>
+
+<div class="container">
+    <h2>Fiche de Relevé - Remontées Capillaires</h2>
+
+    <form id="form">
+        <label for="nom">Nom du client</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" name="adresse" required>
+
+        <label for="telephone">Téléphone</label>
+        <input type="tel" id="telephone" name="telephone" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="date">Date de la visite</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="type_batiment">Type de bâtiment</label>
+        <select id="type_batiment" name="type_batiment" required>
+            <option value="maison">Maison individuelle</option>
+            <option value="appartement">Appartement</option>
+            <option value="bureau">Bureau</option>
+            <option value="autre">Autre</option>
+        </select>
+
+        <label for="nb_murs">Nombre de murs à traiter</label>
+        <input type="number" id="nb_murs" name="nb_murs" min="1" required>
+
+        <label for="longueur_murs">Longueur totale des murs (en mètres)</label>
+        <input type="number" id="longueur_murs" name="longueur_murs" step="0.1" min="0" required>
+
+        <label for="etat_murs">État des murs</label>
+        <select id="etat_murs" name="etat_murs" required>
+            <option value="bon">Bon</option>
+            <option value="moyen">Moyen</option>
+            <option value="mauvais">Mauvais</option>
+        </select>
+
+        <button type="button" onclick="calculDevis()">Calculer le Devis</button>
     </form>
 
-    <div id="resultat" style="display: none;">
-        <h2>Résumé de votre demande</h2>
-        <p><strong>Nom :</strong> <span id="nom-resultat"></span></p>
-        <p><strong>Email :</strong> <span id="email-resultat"></span></p>
-        <p><strong>Téléphone :</strong> <span id="telephone-resultat"></span></p>
-        <p><strong>Adresse :</strong> <span id="adresse-resultat"></span></p>
-        <p><strong>Longueur :</strong> <span id="longueur-resultat"></span> m</p>
-        <p><strong>Épaisseur :</strong> <span id="epaisseur-resultat"></span> cm</p>
-        <p><strong>Nombre de trous :</strong> <span id="nb-trous-resultat"></span></p>
-        <p><strong>Prix total :</strong> <span id="prix-total-resultat"></span></p>
-    </div>
-    <script src="app.js"></script>
+    <div class="result" id="result"></div>
+</div>
+
+<script src="app.js"></script>
+
 </body>
 </html>
