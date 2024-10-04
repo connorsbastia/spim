@@ -1,15 +1,20 @@
 {
-    "short_name": "Devis SPIM",
-    "name": "Devis SPIM Waterproofing Ltd",
+    "short_name": "SPIM Waterproofing",
+    "name": "SPIM Waterproofing Ltd",
     "icons": [
         {
-            "src": "icon.png",  // Assurez-vous d'avoir une icône avec ce nom ou ajustez le nom selon votre fichier
+            "src": "icon.png",
             "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "start_url": ".",
+    "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#000000"
+    "theme_color": "#ffffff"
 }
