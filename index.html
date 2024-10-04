@@ -1,114 +1,45 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devis Remontées Capillaires</title>
-<!-- Lien vers le manifeste -->
-<link rel="manifest" href="manifest.json">
-<!-- Icônes pour l'écran d'accueil -->
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
-</head>
-<body>
-<link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
-<style>
-body {
-font-family: Arial, sans-serif;
-background-color: #f4f4f4;
-margin: 0;
-padding: 20px;
-}
-h1 {
-color: #333;
-}
-form {
-background: #fff;
-padding: 20px;
-border-radius: 5px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-margin-bottom: 20px;
-}
-label {
-display: block;
-margin-bottom: 5px;
-}
-input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
-width: 100%;
-padding: 10px;
-margin-bottom: 15px;
-border: 1px solid #ccc;
-border-radius: 4px;
-}
-button {
-background-color: #28a745;
-color: white;
-padding: 10px 15px;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-}
-button:hover {
-background-color: #218838;
-}
-#resultat {
-background: #e9ecef;
-padding: 15px;
-border-radius: 5px;
-border: 1px solid #ced4da;
-}
-</style>
-</head>
-<body>
-<h1>Formulaire Devis Remontées Capillaires</h1>
+document.getElementById('fiche-client').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-<form id="fiche-client">
-<label for="nom">Nom:</label>
-<input type="text" id="nom" name="nom" required>
+    const nom = document.getElementById('nom').value;
+    const email = document.getElementById('email').value;
+    const telephone = document.getElementById('telephone').value;
+    const adresse = document.getElementById('adresse').value;
+    const longueur = document.getElementById('longueur').value;
+    const epaisseur = document.getElementById('epaisseur').value;
 
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required>
+    const nbTrous = longueur * 10;
+    const nbPoches600ml = (longueur / 10) * (epaisseur / 22) * 3;
+    const prixTotal = longueur * 3900;
 
-<label for="telephone">Téléphone:</label>
-<input type="tel" id="telephone" name="telephone" required>
+    document.getElementById('nom-resultat').innerText = nom;
+    document.getElementById('email-resultat').innerText = email;
+    document.getElementById('telephone-resultat').innerText = telephone;
+    document.getElementById('adresse-resultat').innerText = adresse;
+    document.getElementById('longueur-resultat').innerText = longueur;
+    document.getElementById('epaisseur-resultat').innerText = epaisseur;
+    document.getElementById('nb-trous-resultat').innerText = nbTrous;
+    document.getElementById('nb-Poches-600ml-resultat').innerText = nbPoches600ml.toFixed(1);
+    document.getElementById('prix-total-resultat').innerText = prixTotal.toFixed(2) + ' Rs';
 
-<label for="adresse">Adresse:</label>
-<input type="text" id="adresse" name="adresse" required>
+    document.getElementById('resultat').style.display = 'block';
 
-<label for="longueur">Longueur des murs (mètres):</label>
-<input type="number" id="longueur" name="longueur" step="0.01" required>
+    const templateParams = {
+        nom: nom,
+        email: email,
+        telephone: telephone,
+        adresse: adresse,
+        longueur: longueur,
+        epaisseur: epaisseur,
+        nbTrous: nbTrous,
+        nbPoches600ml: nbPoches600ml.toFixed(1),
+        prixTotal: prixTotal.toFixed(2)
+    };
 
-<label for="epaisseur">Épaisseur des murs (cm):</label>
-<input type="number" id="epaisseur" name="epaisseur" step="0.01" required>
-
-<button type="submit">Calculer le devis</button>
-</form>
-
-<div id="resultat" style="display: none;">
-<h2>Devis Calculé</h2>
-<p><strong>Nom :</strong> <span id="nom-resultat"></span></p>
-<p><strong>Email :</strong> <span id="email-resultat"></span></p>
-<p><strong>Téléphone :</strong> <span id="telephone-resultat"></span></p>
-<p><strong>Adresse :</strong> <span id="adresse-resultat"></span></p>
-<p><strong>Longueur des murs :</strong> <span id="longueur-resultat"></span> m</p>
-<p><strong>Épaisseur des murs :</strong> <span id="epaisseur-resultat"></span> cm</p>
-<p><strong>Nombre de trous à percer :</strong> <span id="nb-trous-resultat"></span></p>
-<p><strong>Nombre de poches 600ml injécté :</strong> <span id="nb-Poches-600ml-resultat"></span></p>
-<p><strong>Prix total :</strong> <span id="prix-total-resultat"></span></p>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script src="app.js"></script>
-<!-- Enregistrement du Service Worker -->
-<script>
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('./service-worker.js')
-.then(function(registration) {
-console.log('Service Worker enregistré avec succès:', registration);
-})
-.catch(function(error) {
-console.log('Échec de l\'enregistrement du Service Worker:', error);
+    emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParams)
+        .then(function(response) {
+            console.log("Email envoyé avec succès !", response.status, response.text);
+        }, function(error) {
+            console.log("Erreur lors de l'envoi de l'email:", error);
+        });
 });
-}
-</body>
-</html>
