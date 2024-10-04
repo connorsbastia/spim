@@ -23,7 +23,7 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
     const nbPoches600ml = (longueur / 10) * (epaisseur / 22) * 3;
     const prixTotal = longueur * 3900;
 
-    // Affichage des résultats à l'utilisateur
+    // Affichage des résultats à l'utilisateur (sans le nombre de poches injectées)
     document.getElementById('nom-resultat').innerText = nom;
     document.getElementById('email-resultat').innerText = email;
     document.getElementById('telephone-resultat').innerText = telephone;
@@ -31,12 +31,11 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
     document.getElementById('longueur-resultat').innerText = longueur;
     document.getElementById('epaisseur-resultat').innerText = epaisseur;
     document.getElementById('nb-trous-resultat').innerText = nbTrous;
-    document.getElementById('nb-Poches-600ml-resultat').innerText = nbPoches600ml.toFixed(1);
     document.getElementById('prix-total-resultat').innerText = prixTotal.toFixed(2) + ' Rs';
     document.getElementById('resultat').style.display = 'block';
 
-    // Préparation des données pour EmailJS
-    const templateParams = {
+    // Préparation des données pour l'email de la compagnie (inclut le nombre de poches injectées)
+    const templateParamsCompagnie = {
         nom: nom,
         email: email,
         telephone: telephone,
@@ -48,13 +47,33 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
         prixTotal: prixTotal.toFixed(2)
     };
 
-    // Envoi de l'email via EmailJS
-    emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParams)
+    // Préparation des données pour l'email du client (sans le nombre de poches injectées)
+    const templateParamsClient = {
+        nom: nom,
+        email: email,
+        telephone: telephone,
+        adresse: adresse,
+        longueur: longueur,
+        epaisseur: epaisseur,
+        nbTrous: nbTrous,
+        prixTotal: prixTotal.toFixed(2)
+    };
+
+    // Envoi de l'email à la compagnie
+    emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParamsCompagnie)
         .then(function(response) {
-            alert("Le devis a été envoyé avec succès !");
-            console.log("Email envoyé avec succès !", response.status, response.text);
+            console.log("Email à la compagnie envoyé avec succès !", response.status, response.text);
         }, function(error) {
-            alert("Erreur lors de l'envoi du devis. Veuillez réessayer.");
-            console.log("Erreur lors de l'envoi de l'email:", error);
+            console.log("Erreur lors de l'envoi de l'email à la compagnie:", error);
+        });
+
+    // Envoi de l'email au client
+    emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParamsClient)
+        .then(function(response) {
+            alert("Le devis a été envoyé avec succès au client !");
+            console.log("Email au client envoyé avec succès !", response.status, response.text);
+        }, function(error) {
+            alert("Erreur lors de l'envoi du devis au client. Veuillez réessayer.");
+            console.log("Erreur lors de l'envoi de l'email au client:", error);
         });
 });
