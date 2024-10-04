@@ -1,20 +1,21 @@
-self.addEventListener('install', (event) => {
+self.addEventListener('install', function(event) {
     event.waitUntil(
-        caches.open('my-cache').then((cache) => {
+        caches.open('my-cache').then(function(cache) {
             return cache.addAll([
                 '/',
-                '/index.html',
-                '/style.css',
-                '/app.js',
-                '/icon.png'  // Assurez-vous d'avoir une icône avec ce nom ou ajustez le nom selon votre fichier
+                'index.html',
+                'style.css',
+                'app.js',
+                'icon.png',
+                'manifest.json'
             ]);
         })
     );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request).then((response) => {
+        caches.match(event.request).then(function(response) {
             return response || fetch(event.request);
         })
     );
