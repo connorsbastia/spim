@@ -60,20 +60,22 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
     };
 
     // Envoi de l'email à la compagnie
-    emailjs.send("service_qp3sjeo", "template_zi0j2ks", templateParamsCompagnie)
-        .then(function(response) {
-            console.log("Email à la compagnie envoyé avec succès !", response.status, response.text);
-        }, function(error) {
-            console.log("Erreur lors de l'envoi de l'email à la compagnie:", error);
-        });
+emailjs.send("service_qp3sjeo", "template_zi0j2ks", templateParamsCompagnie)
+    .then(function(response) {
+        console.log("Email à la compagnie envoyé avec succès !", response.status, response.text);
+    }, function(error) {
+        console.log("Erreur lors de l'envoi de l'email à la compagnie:", error);
+        alert("Erreur lors de l'envoi de l'email à la compagnie : " + JSON.stringify(error));
+    });
 
-    // Envoi de l'email au client
-    emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParamsClient)
-        .then(function(response) {
-            alert("Le devis a été envoyé avec succès au client !");
-            console.log("Email au client envoyé avec succès !", response.status, response.text);
-        }, function(error) {
-            alert("Erreur lors de l'envoi du devis au client. Veuillez réessayer.");
-            console.log("Erreur lors de l'envoi de l'email au client:", error);
-        });
+// Envoi de l'email au client
+emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParamsClient)
+    .then(function(response) {
+        alert("Le devis a été envoyé avec succès au client !");
+        console.log("Email au client envoyé avec succès !", response.status, response.text);
+    }, function(error) {
+        console.log("Erreur lors de l'envoi de l'email au client:", error);
+        alert("Erreur lors de l'envoi de l'email au client : " + JSON.stringify(error));
+    });
+
 });
