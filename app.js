@@ -43,7 +43,7 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
         longueur: longueur,
         epaisseur: epaisseur,
         nbTrous: nbTrous,
-        nbPoches600ml: nbPoches600ml.toFixed(1),
+        nbPoches600ml: nbPoches600ml.toFixed(1), // À envoyer uniquement à la compagnie
         prixTotal: prixTotal.toFixed(2)
     };
 
