@@ -60,7 +60,7 @@ document.getElementById('fiche-client').addEventListener('submit', function(even
     };
 
     // Envoi de l'email à la compagnie
-emailjs.send("service_qp3sjeo", "template_zi0j2ks", templateParamsCompagnie)
+emailjs.send("service_tjcpg3m", "template_zi0j2ks", templateParamsCompagnie)
     .then(function(response) {
         console.log("Email à la compagnie envoyé avec succès !", response.status, response.text);
     }, function(error) {
@@ -69,7 +69,7 @@ emailjs.send("service_qp3sjeo", "template_zi0j2ks", templateParamsCompagnie)
     });
 
 // Envoi de l'email au client
-emailjs.send("service_qp3sjeo", "template_pljm4xp", templateParamsClient)
+emailjs.send("service_tjcpg3m", "template_pljm4xp", templateParamsClient)
     .then(function(response) {
         alert("Le devis a été envoyé avec succès au client !");
         console.log("Email au client envoyé avec succès !", response.status, response.text);
